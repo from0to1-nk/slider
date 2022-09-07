@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <style>
+        .choise-complex {
+            width: 100%;
+            height: 300px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+
+        }
+
+        .choise-complex__slide {
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-position: center;
+            background-size: cover;
+            background-position: center;
+            background-size: cover;
+            width: 320px;
+            background-color: #fff;
+            overflow: hidden;
+            border-radius: 8px;
+            background-repeat: no-repeat;
+            background-image: url('https://bipbap.ru/wp-content/uploads/2017/04/0_7c779_5df17311_orig.jpg');
+        }
+
+        .project__title {
+            color: #fff;
+            text-shadow: 0px 0px 12px black;
+            font-weight: 700;
+        }
+
+        .choise-complex__slide::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: rgb(0 0 0 / 32%);
+            opacity: 1;
+            transition: all, .3s;
+        }
+
+        .choise-complex__slide:hover::before {
+            opacity: 0;
+        }
+
+        .choise-complex__slide.checked .project__title {
+            color: red;
+            font-size: 16px;
+        }
+
+        .choise-complex__slide.checked::before {
+            display: none;
+        }
+
+        input[name=house] {
+            opacity: 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="col-12 col-md-6 col-lg-12">
+        <div class="form-group choise-complex">
+            <div class="swiper-wrapper">
+                <label class="swiper-slide choise-complex__slide"
+                    style="background-image: url('img/zolotoe_sechenie.jpg');">
+                    <span class="project__title">ЖК "Золотое Сечение",
+                        апартаменты</span>
+                    <input type="radio" name="house">
+                </label>
+                <label class="swiper-slide choise-complex__slide"
+                    style="background-image: url('img/zolotoe_sechenie-autor.jpg');">
+                    <span class="project__title">Авторский ЖК "Золотое Сечение", 1
+                        дом</span>
+                    <input type="radio" name="house">
+                </label>
+                <label class="swiper-slide choise-complex__slide"
+                    style="background-image: url('img/shumyatckogo.jpg');">
+                    <span class="project__title">Уютный Дом на Шумяцкого</span>
+                    <input type="radio" name="house">
+                </label>
+                <label class="swiper-slide choise-complex__slide" style="background-image: url('img/dudinskaya.jpg');">
+                    <span class="project__title">ЖК "Уютный дом на Дудинской"</span>
+                    <input type="radio" name="house">
+                </label>
+                <label class="swiper-slide choise-complex__slide" style="background-image: url('img/kalinina.jpg');">
+                    <span class="project__title">Коммерческие помещения в ЖК "Уютный Дом
+                        на Калинина"
+
+                        <input type="radio" name="house">
+                </label>
+                <label class="swiper-slide choise-complex__slide" style="background-image: url('img/berezina.jpg');">
+                    <span class="project__title">Уютный дом на Березина</span> <input type="radio" name="house"></label>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".choise-complex", {
+            slideToClickedSlide: true,
+            autoplay: true,
+            effect: "coverflow",
+            grabCursor: true,
+            initialSlide: 1,
+            centeredSlides: true,
+            slidesPerView: 3,
+            coverflowEffect: {
+                rotate: 20,
+                stretch: 0,
+                depth: 350,
+                modifier: 1,
+                slideShadows: true
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        const toggleCheckedClass = (el) => el.classList.toggle("checked");
+        let choiseInput = document.querySelectorAll("input[name='house']");
+        let choiseSlides = document.querySelectorAll(".choise-complex__slide");
+       
+        choiseSlides.forEach((item) => {                
+            item.addEventListener('click', function () {
+                const prevEl = document.querySelector(".choise-complex__slide.checked");
+                prevEl? toggleCheckedClass(prevEl):false;
+                
+                let activeInput=this.querySelector('input[name=house]');
+                if (activeInput.checked) {
+                    this.classList.add('checked')
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
